@@ -54,59 +54,6 @@
 	line-height: 1.1;
   }
   
-  .message-area-h {
-	height: 80vh;
-  }
-  
-  .message-w {
-	max-width: 400px;
-  }
-  
-  .message-image-w{
-	max-width: 300px;
-  }
-  
-  .message-video-h{
-	max-height: 300px;
-  }
-  
-  .message-image-max-h{
-	max-height: 4900px;
-  }
-  
-  .content-time {
-	bottom: 2px
-  }
-  
-  .arrrow-icon-size {
-	font-size: 1.75rem;
-  }
-  
-  .arrow-messages-edit{
-	border-radius: 22px;
-	padding: 3px
-  }
-  
-  .mini-menu-w{
-	min-width: 500px;
-  }
-  
-  .user-icon-size {
-	font-size: 2.75rem;
-  }
-  
-  .max-input-h {
-	max-height: 13vh;
-  }
-  
-  .audio-w {
-	width: 376px;
-  }
-  
-  .top-18px{
-	top: 18px
-  }
-  
   input[type="range"] {
 	border: none;
 	outline: none;
@@ -140,4 +87,6 @@
 	cursor: pointer;
 	margin-top: -4px;
   }
+  
+
   

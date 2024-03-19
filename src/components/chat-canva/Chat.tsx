@@ -5,6 +5,7 @@ import ChatInput from "../constructors/chat-input/ChatInput";
 import ChatHeader from "../constructors/chat-header/ChatHeader";
 import '../../index.css'
 import './styles.css'
+import './tailwindCorrections.css'
 
 type user = { userId: string; name: string; photo: string; phone: string }
 
@@ -58,7 +59,7 @@ function Chat({ devMode, chat, user, friend, deletedLabel, editMessageFunction, 
   }, [messages])
 
   return (
-    <section className="w-full h-full relative overflow-hidden">
+    <section className="w-full h-full relative overflow-hidden bg-chat-bg">
         <ChatHeader friend={friend} handleGoBackButton={handleGoBackButton}/>
         <div className="w-full h-[80vh] message-area-h h-80vh overflow-y-auto pb-4" id="main-chat" ref={screenRef}>
         {messages.map((thisMessage: message, index: number) => (

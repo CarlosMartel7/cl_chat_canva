@@ -10,7 +10,8 @@ export default {
         "chat-user": "#d3dcfd",
         "chat-friend": "#fff",
         "chat-primary": "#111b21",
-        "chat-secondary": "#6f8171"
+        "chat-secondary": "#6f8171",
+        "chat-bg": "#e2e2e2"
       }
     },
   },
