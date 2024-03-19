@@ -19,7 +19,7 @@ function Message({ message, hasEdit, deletedLabel, saveChangesFunc, index }: Mes
   }
 
   return (
-    <div className={"max-w-[400px] w-fit flex my-1 " + (isUser ? "ml-auto" : "mr-auto")}>
+    <div className={"max-w-[400px] message-w max-w-400px w-fit flex my-1 " + (isUser ? "ml-auto" : "mr-auto")}>
       {format === "text" ? <MessageText index={index} content={message} saveChangesFunc={saveChangesFunc} isUser={isUser} hasEdit={hasEdit} /> : ""}
 
       {format === "audio" ? <MessageAudio index={index} content={message} saveChangesFunc={saveChangesFunc} isUser={isUser} /> : ""}

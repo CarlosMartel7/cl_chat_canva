@@ -11,13 +11,13 @@ function ChatHeader({ friend, handleGoBackButton }: ChatHeaderProps): JSX.Elemen
   return (
     <section className="w-full bg-gray-400">
       <div className="w-full gap-3 py-2 px-6 flex items-center">
-        <span className="text-[1.5rem] cursor-pointer flex" onClick={handleGoBackButton}>
+        <span className="text-[1.5rem] arrrow-icon-size cursor-pointer flex" onClick={handleGoBackButton}>
           <ArrowBackIosNewIcon fontSize="inherit" />
         </span>
         {friend.photo ? (
           <img src={friend.photo} className="w-11 h-11 rounded-full" />
         ) : (
-          <span className="text-[2.75rem] flex">
+          <span className="text-[2.75rem] icon-size flex">
             <AccountCircleIcon fontSize="inherit" />
           </span>
         )}

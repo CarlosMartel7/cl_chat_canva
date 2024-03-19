@@ -96,7 +96,7 @@ export namespace MESSAGE {
         />
 
         <div
-          className={`flex justify-end rounded-br rounded-bl shadow-custom max-w-[400px] text-chat-primary relative ${
+          className={`flex justify-end rounded-br rounded-bl shadow-custom max-w-[400px] message-w text-chat-primary relative ${
             isUser ? "rounded-tl order-1" : "rounded-tr order-2"
           }`}
           style={{ backgroundColor: messageColor }}
@@ -112,7 +112,7 @@ export namespace MESSAGE {
 
           {isUser ? (
             <span
-              className={`absolute text-chat-secondary hover:text-chat-secondary/30 transition-all rounded-bl-[22px] p-[3px]`}
+              className={`absolute text-chat-secondary hover:text-chat-secondary/30 transition-all rounded-bl-[22px] p-[3px] arrow-messages-edit`}
               style={{ backgroundColor: messageColor }}
               onMouseEnter={() => setShowDropArrow(true)}
               onMouseLeave={() => setShowDropArrow(false)}

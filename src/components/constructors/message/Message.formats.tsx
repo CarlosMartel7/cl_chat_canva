@@ -143,7 +143,7 @@ export function MessageAudio({ index, content, photo, isUser, saveChangesFunc }:
     <MESSAGE.EncapsulateMessage index={index} isUser={isUser} format={"other"} messageToChange={content} saveChangesFunc={saveChangesFunc}>
       <Fragment>
         <audio src={content.content} ref={audioRef} />
-        <div className="flex box-border justify-between p-1 w-[376px]">
+        <div className="flex box-border justify-between p-1 w-[376px] audio-w">
           {running ? (
             <div className="h-14 w-14 flex items-center justify-around">
               <button className={`text-white text-center text-sm`}>
@@ -179,10 +179,10 @@ export function MessageAudio({ index, content, photo, isUser, saveChangesFunc }:
                   />
                 </div>
               </div>
-              <div className={`text-xs absolute top-[18px] text-chat-secondary`}>
+              <div className={`text-xs absolute top-[18px] top-18px text-chat-secondary`}>
                 <span>{MESSAGE.secondsToMinutes(Math.round(timeAudio))}</span>
               </div>
-              <div className={`text-xs absolute top-[18px] right-0 text-chat-secondary`}>
+              <div className={`text-xs absolute top-[18px] top-18px right-0 text-chat-secondary`}>
                 <span className="mr-1">{content.time}</span>
                 {isUser ? <MESSAGE.SendStatus readStatus={content.sendStatus} /> : ""}
               </div>
@@ -203,11 +203,11 @@ export function MessageImage({ index, content, isUser, saveChangesFunc }: Omit<M
       format={"other"}
       saveChangesFunc={saveChangesFunc}
     >
-      <div className="w-[300px] max-h-[4900px] relative">
+      <div className="w-[300px] message-image-w max-h-[4900px] message-image-max-h relative">
         <div className="flex items-center justify-center h-full bg-black rounded">
           <img src={content.content} className="w-full flex-grow-0 flex-shrink-0 rounded" />
         </div>
-        <div className={`text-xs absolute bottom-[2px] right-1 text-white`}>
+        <div className={`text-xs absolute bottom-[2px] content-time right-1 text-white`}>
           <span>{content.time}</span>
         </div>
       </div>
@@ -224,13 +224,13 @@ export function MessageVideo({ index, content, isUser, saveChangesFunc }: Omit<M
       format={"other"}
       saveChangesFunc={saveChangesFunc}
     >
-      <div className="w-[300px] max-h-[300px] relative">
+      <div className="w-[300px] message-image-w max-h-[300px] message-video-h relative">
         <div className="flex items-center justify-center h-full bg-black rounded">
           <video controls preload="metadata" className="w-full flex-grow-0 flex-shrink-0 rounded">
             <source src={content.content} />
           </video>
         </div>
-        <div className={`text-xs absolute bottom-[2px] right-1 text-white`}>
+        <div className={`text-xs absolute bottom-[2px] content-time right-1 text-white`}>
           <span>{content.time}</span>
         </div>
       </div>
@@ -249,7 +249,7 @@ export function MessageDeleted({ index, isUser, deletedLabel }: MessageDeletedPr
 
   return (
     <div
-      className={`flex justify-end rounded-br rounded-bl shadow-custom max-w-[400px] text-chat-primary ${
+      className={`flex justify-end rounded-br rounded-bl shadow-custom max-w-[400px] message-w text-chat-primary ${
         isUser ? "rounded-tl order-1" : "rounded-tr order-2"
       }`}
       style={{ backgroundColor: messageColor }}
