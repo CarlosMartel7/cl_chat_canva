@@ -1,0 +1,143 @@
+::-webkit-scrollbar {
+	width: 5px;
+	height: 3px;
+	z-index: -999;
+  }
+  ::-webkit-scrollbar-track {
+	background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+	border-radius: 20px;
+	background: #888;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+	background: #284864;
+  }
+  
+  :root {
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+  
+	color-scheme: light dark;
+	color: rgba(255, 255, 255, 0.87);
+	background-color: #e2e2e2;
+  
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+  }
+  
+  #root {
+	min-height: 100vh;
+	min-width: 100vw;
+  }
+  
+  button,
+  a,
+  image,
+  svg {
+	outline: none !important;
+  }
+  
+  body {
+	margin: 0;
+	display: flex;
+	place-items: center;
+	min-width: 320px;
+	min-height: 100vh;
+  }
+  
+  h1 {
+	font-size: 3.2em;
+	line-height: 1.1;
+  }
+  
+  .message-area-h {
+	height: 80vh;
+  }
+  
+  .message-w {
+	max-width: 400px;
+  }
+  
+  .message-image-w{
+	max-width: 300px;
+  }
+  
+  .message-video-h{
+	max-height: 300px;
+  }
+  
+  .message-image-max-h{
+	max-height: 4900px;
+  }
+  
+  .content-time {
+	bottom: 2px
+  }
+  
+  .arrrow-icon-size {
+	font-size: 1.75rem;
+  }
+  
+  .arrow-messages-edit{
+	border-radius: 22px;
+	padding: 3px
+  }
+  
+  .mini-menu-w{
+	min-width: 500px;
+  }
+  
+  .user-icon-size {
+	font-size: 2.75rem;
+  }
+  
+  .max-input-h {
+	max-height: 13vh;
+  }
+  
+  .audio-w {
+	width: 376px;
+  }
+  
+  .top-18px{
+	top: 18px
+  }
+  
+  input[type="range"] {
+	border: none;
+	outline: none;
+	box-shadow: none;
+	width: 250px;
+	padding: 0;
+	margin: 0;
+	background: 0;
+	appearance: none;
+	-webkit-appearance: none;
+  }
+  
+  /* CUSTOM SLIDER TRACK */
+  input[type="range"]::-webkit-slider-runnable-track {
+	border: none;
+	outline: none;
+	background: #4a4a4a;
+	height: 6px;
+	border-radius: 10px;
+	appearance: none;
+	-webkit-appearance: none;
+  }
+  
+  /* CUSTOM SLIDER BUTTON */
+  input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	background: #6f8171;
+	cursor: pointer;
+	margin-top: -4px;
+  }
+  
