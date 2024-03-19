@@ -1,8 +1,7 @@
 {
-  "name": "@CarlosMartel7/chat-canva",
+  "name": "cl_chat_canva",
   "version": "1.0.0",
-  "private": true,
-  "description": "",
+  "private": false,
   "main": "index.js",
   "scripts": {
     "rollup": "rollup -c",
@@ -37,5 +36,14 @@
     "rollup-plugin-dts": "^6.1.0",
     "tailwindcss": "^3.4.0",
     "typescript": "^5.3.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CarlosMartel7/cl_chat_canva.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CarlosMartel7/cl_chat_canva/issues"
+  },
+  "homepage": "https://github.com/CarlosMartel7/cl_chat_canva#readme",
+  "description": ""
 }
