@@ -10,7 +10,7 @@ import { MINIMENU } from "../mini-menu/Mini_Menu.functions";
 interface EncapsulateMessageProps {
   isUser: boolean;
   hasEdit?: boolean;
-  hasDelete?: boolean;
+  hasDelete: boolean;
   index: number;
   style?: React.CSSProperties;
   format: "text" | "other";
@@ -84,7 +84,6 @@ export namespace MESSAGE {
       }
     };
 
-    if (hasEdit && hasDelete) {
       return (
         <Fragment>
           <MINIMENU.ModalEdit
@@ -117,7 +116,7 @@ export namespace MESSAGE {
               {children}
             </div>
 
-            {isUser ? (
+            {isUser && hasEdit && hasDelete ? (
               <span
                 className={`absolute text-chat-secondary hover:text-chat-secondary/30 transition-all rounded-bl-[22px] p-[3px] arrow-messages-edit`}
                 style={{ backgroundColor: messageColor }}
@@ -152,27 +151,6 @@ export namespace MESSAGE {
           </div>
         </Fragment>
       );
-    }
-
-    return (
-      <Fragment>
-        <div
-          className={`flex justify-end rounded-br rounded-bl shadow-custom max-w-[400px] message-w text-chat-primary relative ${
-            isUser ? "rounded-tl order-1" : "rounded-tr order-2"
-          }`}
-          style={{ backgroundColor: messageColor }}
-        >
-          <div
-            className="p-2 box-border flex bg-transparent items-start justify-end max-w-full"
-            style={style}
-            onMouseEnter={() => setShowDropArrow(true)}
-            onMouseLeave={() => setShowDropArrow(false)}
-          >
-            {children}
-          </div>
-        </div>
-      </Fragment>
-    );
   }
 
   interface SendStatusProps {

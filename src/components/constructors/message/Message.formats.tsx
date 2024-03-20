@@ -16,7 +16,7 @@ interface MessageFormatProps {
   hasEdit?: boolean;
   content: message;
   isUser: boolean;
-  hasDelete?: boolean;
+  hasDelete: boolean;
   photo?: {
     user: urlBrand | undefined;
     friend: urlBrand | undefined;
