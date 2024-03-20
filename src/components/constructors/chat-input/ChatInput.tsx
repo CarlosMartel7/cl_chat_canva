@@ -12,13 +12,14 @@ function formatHourMinute(date: Date) {
 
 interface ChatInputProps {
   attachItemFunction: (payload: FileList) => Promise<any>;
-  setMessage: React.Dispatch<React.SetStateAction<message[]>>;
+  setMessages: React.Dispatch<React.SetStateAction<message[]>>;
   sendMessageFunction: sendMessageFunction;
   initialSend?: "pending" | "send" | "read" | "received";
   hasAttached?: boolean;
+  messages: message[];
 }
 
-function ChatInput({ attachItemFunction, setMessage, initialSend, hasAttached, sendMessageFunction }: ChatInputProps): JSX.Element {
+function ChatInput({ attachItemFunction, setMessages, messages, initialSend, hasAttached, sendMessageFunction }: ChatInputProps): JSX.Element {
   const fileRef = useRef<null | HTMLInputElement>(null);
   const [attachValue, setAttachValue] = useState<FileList | null>(null);
   const [textValue, setTextValue] = useState<string>("");
@@ -56,8 +57,7 @@ function ChatInput({ attachItemFunction, setMessage, initialSend, hasAttached, s
   const handleSendMessage = () => {
     setTextValue("");
     setTextHeight(10);
-    setMessage((prev: message[]) => {
-      const lastOrder = prev[prev.length - 1].order;
+      const lastOrder = messages[messages.length - 1].order;
 
       const newMessage: message = {
         content: textValue,
@@ -68,11 +68,12 @@ function ChatInput({ attachItemFunction, setMessage, initialSend, hasAttached, s
         sendStatus: initialSend === undefined ? "pending" : initialSend,
       };
 
-      sendMessageFunction("text", [...prev, newMessage], newMessage);
-    
-      return [...prev, newMessage]
-    });
-  };
+      if(sendMessageFunction){
+        sendMessageFunction("text", [...messages, newMessage], newMessage);
+      } else {
+        setMessages([...messages, newMessage])
+      }
+    }
 
   return (
     <Fragment>

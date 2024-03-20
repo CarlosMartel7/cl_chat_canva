@@ -70,12 +70,12 @@ function Chat({ devMode, chat, user, friend, deletedLabel, editMessageFunction, 
   return (
     <section className="w-full h-full relative overflow-hidden bg-chat-bg">
         <ChatHeader friend={friend} handleGoBackButton={handleGoBackButton}/>
-        <div className="w-full h-[80vh] message-area-h h-80vh overflow-y-auto pb-4" id="main-chat" ref={screenRef}>
+        <div className="w-full h-[80vh] message-area-h h-80vh overflow-y-auto pb-6" id="main-chat" ref={screenRef}>
         {messages.map((thisMessage: message, index: number) => (
           <Message message={thisMessage} index={index} deletedLabel={deletedLabel} saveChangesFunc={saveChangesFunc} key={thisMessage.order} hasDelete={hasDelete != undefined ? hasDelete : true}  hasEdit={hasEdit != undefined ? hasEdit : true} />
         ))}
         </div>
-        <ChatInput setMessage={setMessages} initialSend={initialSend} hasAttached={hasAttach != undefined ? hasAttach : true} sendMessageFunction={sendMessageFunction}/>
+        <ChatInput setMessages={setMessages} messages={messages} initialSend={initialSend} hasAttached={hasAttach != undefined ? hasAttach : true} sendMessageFunction={sendMessageFunction}/>
     </section>
   );
 }
