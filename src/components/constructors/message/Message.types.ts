@@ -6,7 +6,7 @@ export type editChangesFunction = (format: string, content: message, index: numb
 
 export type deleteMessageFunction = (index: number, prevContent: message) => void
 
-export type sendMessageFunction = (format: string, content: message[]) => void
+export type sendMessageFunction = (format: string, chat: message[], thisMessage: message) => void
 
 export type message = {
   content: string;

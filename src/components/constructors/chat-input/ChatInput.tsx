@@ -68,7 +68,7 @@ function ChatInput({ attachItemFunction, setMessage, initialSend, hasAttached, s
         sendStatus: initialSend === undefined ? "pending" : initialSend,
       };
 
-      sendMessageFunction("text", [...prev, newMessage]);
+      sendMessageFunction("text", [...prev, newMessage], newMessage);
     
       return [...prev, newMessage]
     });
