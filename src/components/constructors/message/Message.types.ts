@@ -12,7 +12,7 @@ export type message = {
   order: number;
   isUser: boolean;
   time: string;
-  sendStatus?: false | true | "received" | "read"
+  sendStatus?: 'pending' | 'send' | "received" | "read"
 };
 
 export enum $message_color {

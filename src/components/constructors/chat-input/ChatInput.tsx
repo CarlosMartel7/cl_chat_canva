@@ -13,7 +13,7 @@ function formatHourMinute(date: Date) {
 interface ChatInputProps {
   attachItemFunction: (payload: FileList) => Promise<any>;
   setMessage: React.Dispatch<React.SetStateAction<message[]>>;
-  initialSend?: boolean | "read" | "received";
+  initialSend?: "pending" | "send" | "read" | "received";
   hasAttached?: boolean;
 }
 
@@ -64,7 +64,7 @@ function ChatInput({ attachItemFunction, setMessage, initialSend, hasAttached }:
         isUser: true,
         order: lastOrder + 1,
         time: formatHourMinute(new Date()),
-        sendStatus: initialSend === undefined ? false : initialSend,
+        sendStatus: initialSend === undefined ? "pending" : initialSend,
       };
 
       return [...prev, newMessage];

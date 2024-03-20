@@ -4,6 +4,7 @@ import { message, saveChangesFunction } from "../message/Message.types";
 export interface MiniMenuProps {
   isOpen: boolean;
   hasEdit: boolean;
+  hasDelete: boolean;
   handleEditMessage: () => void ; 
   handleDeleteMessage: () => void;
 }

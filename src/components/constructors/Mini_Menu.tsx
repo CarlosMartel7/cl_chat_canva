@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { MiniMenuProps } from "./mini-menu/Mini_Menu.types";
 import { MINIMENU } from "./mini-menu/Mini_Menu.functions";
 
-function MiniMenu({ isOpen, hasEdit, handleEditMessage, handleDeleteMessage }: MiniMenuProps): JSX.Element {
+function MiniMenu({ isOpen, hasEdit, hasDelete, handleEditMessage, handleDeleteMessage }: MiniMenuProps): JSX.Element {
   return (
     <Fragment>
       {isOpen ? (
@@ -15,9 +15,14 @@ function MiniMenu({ isOpen, hasEdit, handleEditMessage, handleDeleteMessage }: M
             ) : (
               ""
             )}
-            <button className="pl-3 pr-8 py-1 text-sm w-full text-left hover:bg-chat-user" onClick={handleDeleteMessage}>
-              Deletar
-            </button>
+
+            {hasDelete ? (
+              <button className="pl-3 pr-8 py-1 text-sm w-full text-left hover:bg-chat-user" onClick={handleDeleteMessage}>
+                Deletar
+              </button>
+            ) : (
+              ""
+            )}
           </div>
         </Fragment>
       ) : (

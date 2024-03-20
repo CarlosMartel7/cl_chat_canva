@@ -7,10 +7,11 @@ interface MessageProps {
   deletedLabel: string;
   hasEdit: boolean;
   index: number;
+  hasDelete: boolean;
   saveChangesFunc: saveChangesFunction
 }
 
-function Message({ message, hasEdit, deletedLabel, saveChangesFunc, index }: MessageProps): JSX.Element {
+function Message({ message, hasEdit, hasDelete, deletedLabel, saveChangesFunc, index }: MessageProps): JSX.Element {
   const { format, isUser } = message;
   const messageColor: $message_color = isUser ? $message_color.HEX_USER : $message_color.HEX_FRIEND;
 
@@ -20,13 +21,13 @@ function Message({ message, hasEdit, deletedLabel, saveChangesFunc, index }: Mes
 
   return (
     <div className={"max-w-[400px] message-w max-w-400px w-fit flex my-1 " + (isUser ? "ml-auto" : "mr-auto")}>
-      {format === "text" ? <MessageText index={index} content={message} saveChangesFunc={saveChangesFunc} isUser={isUser} hasEdit={hasEdit} /> : ""}
+      {format === "text" ? <MessageText index={index} content={message} saveChangesFunc={saveChangesFunc} isUser={isUser} hasEdit={hasEdit} hasDelete={hasDelete} /> : ""}
 
-      {format === "audio" ? <MessageAudio index={index} content={message} saveChangesFunc={saveChangesFunc} isUser={isUser} /> : ""}
+      {format === "audio" ? <MessageAudio index={index} content={message} saveChangesFunc={saveChangesFunc} isUser={isUser} hasDelete={hasDelete}/> : ""}
 
-      {format === "image" ? <MessageImage index={index} content={message} saveChangesFunc={saveChangesFunc} isUser={isUser} /> : ""}
+      {format === "image" ? <MessageImage index={index} content={message} saveChangesFunc={saveChangesFunc} isUser={isUser} hasDelete={hasDelete}/> : ""}
 
-      {format === "video" ? <MessageVideo index={index} content={message} saveChangesFunc={saveChangesFunc} isUser={isUser} /> : ""}
+      {format === "video" ? <MessageVideo index={index} content={message} saveChangesFunc={saveChangesFunc} isUser={isUser} hasDelete={hasDelete}/> : ""}
 
       {format === "deleted" ? <MessageDeleted index={index} isUser={isUser} deletedLabel={deletedLabel}/> : ""}
       <span className={`block h-3 w-2 ${isUser ? "order-2" : "order-1"}`}>

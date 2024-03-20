@@ -13,9 +13,10 @@ import { urlBrand } from "../user/User.types";
 
 interface MessageFormatProps {
   index: number;
-  hasEdit: boolean;
+  hasEdit?: boolean;
   content: message;
   isUser: boolean;
+  hasDelete?: boolean;
   photo?: {
     user: urlBrand | undefined;
     friend: urlBrand | undefined;
@@ -23,9 +24,9 @@ interface MessageFormatProps {
   saveChangesFunc: saveChangesFunction
 }
 
-export function MessageText({ index, hasEdit, content, isUser, saveChangesFunc }: MessageFormatProps): JSX.Element {
+export function MessageText({ hasDelete, index, hasEdit, content, isUser, saveChangesFunc }: MessageFormatProps): JSX.Element {
   return (
-    <MESSAGE.EncapsulateMessage index={index} isUser={isUser} format={"text"} hasEdit={hasEdit} messageToChange={content} saveChangesFunc={saveChangesFunc}>
+    <MESSAGE.EncapsulateMessage index={index} hasDelete={hasDelete} isUser={isUser} format={"text"} hasEdit={hasEdit} messageToChange={content} saveChangesFunc={saveChangesFunc}>
       <div className={`relative ${isUser ? "pr-14" : "pr-10"}`}>
         <p className={`text-sm break-words`}>{content.content}</p>
         <div className={`text-xs absolute bottom-0 right-0 text-chat-secondary`}>
@@ -39,7 +40,7 @@ export function MessageText({ index, hasEdit, content, isUser, saveChangesFunc }
 
 // Ainda é preciso colocar a foto e alterar um pouco o display do audio
 
-export function MessageAudio({ index, content, photo, isUser, saveChangesFunc }: Omit<MessageFormatProps, "hasEdit">): JSX.Element {
+export function MessageAudio({ hasDelete, index, content, photo, isUser, saveChangesFunc }: Omit<MessageFormatProps, "hasEdit">): JSX.Element {
   const [play, setPlay] = useState<boolean>(false);
   const [running, setRunning] = useState<boolean>(false);
   const [speed, setSpeed] = useState<number>(1.0);
@@ -140,7 +141,7 @@ export function MessageAudio({ index, content, photo, isUser, saveChangesFunc }:
   };
 
   return (
-    <MESSAGE.EncapsulateMessage index={index} isUser={isUser} format={"other"} messageToChange={content} saveChangesFunc={saveChangesFunc}>
+    <MESSAGE.EncapsulateMessage index={index} hasDelete={hasDelete} isUser={isUser} format={"other"} messageToChange={content} saveChangesFunc={saveChangesFunc}>
       <Fragment>
         <audio src={content.content} ref={audioRef} />
         <div className="flex box-border justify-between p-1 w-[376px] audio-w">
@@ -194,9 +195,9 @@ export function MessageAudio({ index, content, photo, isUser, saveChangesFunc }:
   );
 }
 
-export function MessageImage({ index, content, isUser, saveChangesFunc }: Omit<MessageFormatProps, "hasEdit">): JSX.Element {
+export function MessageImage({ hasDelete, index, content, isUser, saveChangesFunc }: Omit<MessageFormatProps, "hasEdit">): JSX.Element {
   return (
-    <MESSAGE.EncapsulateMessage index={index}
+    <MESSAGE.EncapsulateMessage index={index} hasDelete={hasDelete}
       isUser={isUser}
       style={{ padding: "6px 6px 6px 6px" }}
       messageToChange={content}
@@ -215,9 +216,9 @@ export function MessageImage({ index, content, isUser, saveChangesFunc }: Omit<M
   );
 }
 
-export function MessageVideo({ index, content, isUser, saveChangesFunc }: Omit<MessageFormatProps, "hasEdit">): JSX.Element {
+export function MessageVideo({ hasDelete, index, content, isUser, saveChangesFunc }: Omit<MessageFormatProps, "hasEdit">): JSX.Element {
   return (
-    <MESSAGE.EncapsulateMessage index={index}
+    <MESSAGE.EncapsulateMessage index={index} hasDelete={hasDelete}
       isUser={isUser}
       style={{ padding: "6px 6px 6px 6px" }}
       messageToChange={content}

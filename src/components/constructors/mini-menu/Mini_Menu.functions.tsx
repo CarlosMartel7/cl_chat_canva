@@ -91,7 +91,7 @@ export namespace MINIMENU {
         time: messageToChange.time
       }
 
-      saveChangesFunc('text', messageContent, index,  'deleted')
+      saveChangesFunc('text', messageContent, index, 'deleted')
     } 
 
     return (

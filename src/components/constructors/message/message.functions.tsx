@@ -10,6 +10,7 @@ import { MINIMENU } from "../mini-menu/Mini_Menu.functions";
 interface EncapsulateMessageProps {
   isUser: boolean;
   hasEdit?: boolean;
+  hasDelete?: boolean;
   index: number;
   style?: React.CSSProperties;
   format: "text" | "other";
@@ -21,6 +22,7 @@ interface EncapsulateMessageProps {
 export namespace MESSAGE {
   export function EncapsulateMessage({
     hasEdit,
+    hasDelete,
     index,
     isUser,
     style,
@@ -84,76 +86,80 @@ export namespace MESSAGE {
       }
     };
 
-    return (
-      <Fragment>
-        <MINIMENU.ModalEdit open={openEdit} messageToChange={messageToChange} setOpen={setOpenEdit} saveChangesFunc={saveChangesFunc} index={index} />
-        <MINIMENU.ModalDelete
-          open={openDelete}
-          index={index}
-          messageToChange={messageToChange}
-          setOpen={setOpenDelete}
-          saveChangesFunc={saveChangesFunc}
-        />
-
-        <div
-          className={`flex justify-end rounded-br rounded-bl shadow-custom max-w-[400px] message-w text-chat-primary relative ${
-            isUser ? "rounded-tl order-1" : "rounded-tr order-2"
-          }`}
-          style={{ backgroundColor: messageColor }}
-        >
+    if(hasEdit && hasDelete){
+      return (
+        <Fragment>
+          <MINIMENU.ModalEdit open={openEdit} messageToChange={messageToChange} setOpen={setOpenEdit} saveChangesFunc={saveChangesFunc} index={index} />
+          <MINIMENU.ModalDelete
+            open={openDelete}
+            index={index}
+            messageToChange={messageToChange}
+            setOpen={setOpenDelete}
+            saveChangesFunc={saveChangesFunc}
+          />
+  
           <div
-            className="p-2 box-border flex bg-transparent items-start justify-end max-w-full"
-            style={style}
-            onMouseEnter={() => setShowDropArrow(true)}
-            onMouseLeave={() => setShowDropArrow(false)}
+            className={`flex justify-end rounded-br rounded-bl shadow-custom max-w-[400px] message-w text-chat-primary relative ${
+              isUser ? "rounded-tl order-1" : "rounded-tr order-2"
+            }`}
+            style={{ backgroundColor: messageColor }}
           >
-            {children}
-          </div>
-
-          {isUser ? (
-            <span
-              className={`absolute text-chat-secondary hover:text-chat-secondary/30 transition-all rounded-bl-[22px] p-[3px] arrow-messages-edit`}
-              style={{ backgroundColor: messageColor }}
+            <div
+              className="p-2 box-border flex bg-transparent items-start justify-end max-w-full"
+              style={style}
               onMouseEnter={() => setShowDropArrow(true)}
               onMouseLeave={() => setShowDropArrow(false)}
-              ref={menuRef}
             >
-              {showDropArrow || (miniMenu && isUser) ? (
-                <div className="relative">
-                  <button
-                    onClick={() => {
-                      handleSetMiniMenu();
-                    }}
-                  >
-                    <ArrowDropDownIcon />
-                  </button>
-                </div>
-              ) : (
-                ""
-              )}
-              <MiniMenu isOpen={miniMenu} handleEditMessage={handleEditMessage} handleDeleteMessage={handleDeleteMessage} hasEdit={format === 'text' && hasEdit ? true : false } />
-            </span>
-          ) : (
-            ""
-          )}
-        </div>
-      </Fragment>
-    );
+              {children}
+            </div>
+  
+            {isUser ? (
+              <span
+                className={`absolute text-chat-secondary hover:text-chat-secondary/30 transition-all rounded-bl-[22px] p-[3px] arrow-messages-edit`}
+                style={{ backgroundColor: messageColor }}
+                onMouseEnter={() => setShowDropArrow(true)}
+                onMouseLeave={() => setShowDropArrow(false)}
+                ref={menuRef}
+              >
+                {showDropArrow || (miniMenu && isUser) ? (
+                  <div className="relative">
+                    <button
+                      onClick={() => {
+                        handleSetMiniMenu();
+                      }}
+                    >
+                      <ArrowDropDownIcon />
+                    </button>
+                  </div>
+                ) : (
+                  ""
+                )}
+                <MiniMenu isOpen={miniMenu} handleEditMessage={handleEditMessage} handleDeleteMessage={handleDeleteMessage} hasDelete={hasDelete} hasEdit={format === 'text' && hasEdit ? true : false } />
+              </span>
+            ) : (
+              ""
+            )}
+          </div>
+        </Fragment>
+      );
+    }
+
+    return<Fragment></Fragment>
   }
 
   interface SendStatusProps {
-    readStatus?: boolean | "read" | "received";
+    readStatus?: "pending" | "send" | "read" | "received";
   }
 
   export function SendStatus({ readStatus }: SendStatusProps): JSX.Element {
     switch (readStatus) {
-      case false:
+      case "pending":
         return (
           <span className=" text-sm">
             <QueryBuilderIcon fontSize="inherit" />
           </span>
         );
-      case true:
+      case "send":
         return (
           <span className=" text-sm">
             <CheckIcon fontSize="inherit" />
