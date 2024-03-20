@@ -20,10 +20,11 @@ interface ChatProps {
   hasAttach?: boolean;
   hasEdit?: boolean;
   hasDelete?: boolean;
+  initialSend: "pending" | "send" | "read" | "received";
   handleGoBackButton: () => void;
 }
 
-function Chat({ devMode, chat, user, friend, deletedLabel, editMessageFunction, deleteMessageFunction, hasAttach, hasDelete, hasEdit, handleGoBackButton }: ChatProps): JSX.Element {
+function Chat({ devMode, chat, user, friend, deletedLabel, editMessageFunction, deleteMessageFunction, hasAttach, hasDelete, hasEdit, initialSend, handleGoBackButton }: ChatProps): JSX.Element {
   const [messages, setMessages] = useState<message[]>(chat);
   const screenRef = useRef<HTMLDivElement | null>(null)
 
@@ -64,10 +65,10 @@ function Chat({ devMode, chat, user, friend, deletedLabel, editMessageFunction, 
         <ChatHeader friend={friend} handleGoBackButton={handleGoBackButton}/>
         <div className="w-full h-[80vh] message-area-h h-80vh overflow-y-auto pb-4" id="main-chat" ref={screenRef}>
         {messages.map((thisMessage: message, index: number) => (
-          <Message message={thisMessage} index={index} deletedLabel={deletedLabel} saveChangesFunc={saveChangesFunc} key={thisMessage.order} hasDelete={hasEdit != undefined ? hasEdit : true}  hasEdit={hasEdit != undefined ? hasEdit : true} />
+          <Message message={thisMessage} index={index} deletedLabel={deletedLabel} saveChangesFunc={saveChangesFunc} key={thisMessage.order} hasDelete={hasDelete != undefined ? hasDelete : true}  hasEdit={hasEdit != undefined ? hasEdit : true} />
         ))}
         </div>
-        <ChatInput setMessage={setMessages} initialSend={"received"} hasAttached={hasAttach != undefined ? hasAttach : true}/>
+        <ChatInput setMessage={setMessages} initialSend={initialSend} hasAttached={hasAttach != undefined ? hasAttach : true}/>
     </section>
   );
 }
