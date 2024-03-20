@@ -56,6 +56,12 @@ function Chat({ devMode, chat, user, friend, deletedLabel, editMessageFunction, 
   };
 
   useEffect(() => {
+    if(messages.length != chat.length){
+      setMessages(chat)
+    }
+  }, [chat])
+
+  useEffect(() => {
     if(screenRef.current){
       screenRef.current.scrollTop = screenRef.current.scrollHeight
     }
