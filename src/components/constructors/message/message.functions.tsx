@@ -144,7 +144,7 @@ export namespace MESSAGE {
       );
     }
 
-    return<Fragment></Fragment>
+    return<Fragment>{children}</Fragment>
   }
 
   interface SendStatusProps {
