@@ -37,17 +37,16 @@ export namespace MESSAGE {
     const [openEdit, setOpenEdit] = useState<boolean>(false);
     const [openDelete, setOpenDelete] = useState<boolean>(false);
 
-    const menuRef = useRef<HTMLSpanElement | null>(null)
+    const menuRef = useRef<HTMLSpanElement | null>(null);
 
-  
     useEffect(() => {
-      document.addEventListener('click', handleClickOutside);
-  
+      document.addEventListener("click", handleClickOutside);
+
       return () => {
-        document.removeEventListener('click', handleClickOutside);
+        document.removeEventListener("click", handleClickOutside);
       };
     }, []);
-  
+
     const handleClickOutside = (event: any) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setMiniMenu(false);
@@ -62,7 +61,6 @@ export namespace MESSAGE {
         }
       }
     };
-
 
     const handleEditMessage = (): void => {
       setMiniMenu(false);
@@ -86,10 +84,16 @@ export namespace MESSAGE {
       }
     };
 
-    if(hasEdit && hasDelete){
+    if (hasEdit && hasDelete) {
       return (
         <Fragment>
-          <MINIMENU.ModalEdit open={openEdit} messageToChange={messageToChange} setOpen={setOpenEdit} saveChangesFunc={saveChangesFunc} index={index} />
+          <MINIMENU.ModalEdit
+            open={openEdit}
+            messageToChange={messageToChange}
+            setOpen={setOpenEdit}
+            saveChangesFunc={saveChangesFunc}
+            index={index}
+          />
           <MINIMENU.ModalDelete
             open={openDelete}
             index={index}
@@ -97,7 +101,7 @@ export namespace MESSAGE {
             setOpen={setOpenDelete}
             saveChangesFunc={saveChangesFunc}
           />
-  
+
           <div
             className={`flex justify-end rounded-br rounded-bl shadow-custom max-w-[400px] message-w text-chat-primary relative ${
               isUser ? "rounded-tl order-1" : "rounded-tr order-2"
@@ -112,7 +116,7 @@ export namespace MESSAGE {
             >
               {children}
             </div>
-  
+
             {isUser ? (
               <span
                 className={`absolute text-chat-secondary hover:text-chat-secondary/30 transition-all rounded-bl-[22px] p-[3px] arrow-messages-edit`}
@@ -134,7 +138,13 @@ export namespace MESSAGE {
                 ) : (
                   ""
                 )}
-                <MiniMenu isOpen={miniMenu} handleEditMessage={handleEditMessage} handleDeleteMessage={handleDeleteMessage} hasDelete={hasDelete} hasEdit={format === 'text' && hasEdit ? true : false } />
+                <MiniMenu
+                  isOpen={miniMenu}
+                  handleEditMessage={handleEditMessage}
+                  handleDeleteMessage={handleDeleteMessage}
+                  hasDelete={hasDelete}
+                  hasEdit={format === "text" && hasEdit ? true : false}
+                />
               </span>
             ) : (
               ""
@@ -144,7 +154,25 @@ export namespace MESSAGE {
       );
     }
 
-    return<Fragment>{children}</Fragment>
+    return (
+      <Fragment>
+        <div
+          className={`flex justify-end rounded-br rounded-bl shadow-custom max-w-[400px] message-w text-chat-primary relative ${
+            isUser ? "rounded-tl order-1" : "rounded-tr order-2"
+          }`}
+          style={{ backgroundColor: messageColor }}
+        >
+          <div
+            className="p-2 box-border flex bg-transparent items-start justify-end max-w-full"
+            style={style}
+            onMouseEnter={() => setShowDropArrow(true)}
+            onMouseLeave={() => setShowDropArrow(false)}
+          >
+            {children}
+          </div>
+        </div>
+      </Fragment>
+    );
   }
 
   interface SendStatusProps {
