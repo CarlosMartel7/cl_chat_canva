@@ -33,6 +33,10 @@
 	resize: none;
   }
   
+  .overflow-y-visible{
+    overflow-y: auto;
+  }
+
   .overflow-y-visible {
 	overflow-y: visible;
   }
