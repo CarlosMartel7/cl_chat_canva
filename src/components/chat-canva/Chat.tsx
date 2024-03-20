@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Message from "../constructors/Message";
-import { deleteMessageFunction, editChangesFunction, message} from "../constructors/message/Message.types";
+import { deleteMessageFunction, editChangesFunction, message, sendMessageFunction} from "../constructors/message/Message.types";
 import ChatInput from "../constructors/chat-input/ChatInput";
 import ChatHeader from "../constructors/chat-header/ChatHeader";
 import '../../index.css'
@@ -17,6 +17,7 @@ interface ChatProps {
   deletedLabel: string;
   editMessageFunction: editChangesFunction;
   deleteMessageFunction: deleteMessageFunction;
+  sendMessageFunction: sendMessageFunction;
   hasAttach?: boolean;
   hasEdit?: boolean;
   hasDelete?: boolean;
@@ -24,7 +25,7 @@ interface ChatProps {
   handleGoBackButton: () => void;
 }
 
-function Chat({ devMode, chat, user, friend, deletedLabel, editMessageFunction, deleteMessageFunction, hasAttach, hasDelete, hasEdit, initialSend, handleGoBackButton }: ChatProps): JSX.Element {
+function Chat({ devMode, chat, user, friend, deletedLabel, editMessageFunction, deleteMessageFunction, sendMessageFunction, hasAttach, hasDelete, hasEdit, initialSend, handleGoBackButton }: ChatProps): JSX.Element {
   const [messages, setMessages] = useState<message[]>(chat);
   const screenRef = useRef<HTMLDivElement | null>(null)
 
@@ -68,7 +69,7 @@ function Chat({ devMode, chat, user, friend, deletedLabel, editMessageFunction, 
           <Message message={thisMessage} index={index} deletedLabel={deletedLabel} saveChangesFunc={saveChangesFunc} key={thisMessage.order} hasDelete={hasDelete != undefined ? hasDelete : true}  hasEdit={hasEdit != undefined ? hasEdit : true} />
         ))}
         </div>
-        <ChatInput setMessage={setMessages} initialSend={initialSend} hasAttached={hasAttach != undefined ? hasAttach : true}/>
+        <ChatInput setMessage={setMessages} initialSend={initialSend} hasAttached={hasAttach != undefined ? hasAttach : true} sendMessageFunction={sendMessageFunction}/>
     </section>
   );
 }

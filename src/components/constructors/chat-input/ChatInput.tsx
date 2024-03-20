@@ -1,7 +1,7 @@
 import React, { Fragment, useRef, useState } from "react";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import SendIcon from "@mui/icons-material/Send";
-import { message } from "../message/Message.types";
+import { message, sendMessageFunction } from "../message/Message.types";
 import TextArea from "../common/TextArea";
 
 function formatHourMinute(date: Date) {
@@ -13,11 +13,12 @@ function formatHourMinute(date: Date) {
 interface ChatInputProps {
   attachItemFunction: (payload: FileList) => Promise<any>;
   setMessage: React.Dispatch<React.SetStateAction<message[]>>;
+  sendMessageFunction: sendMessageFunction;
   initialSend?: "pending" | "send" | "read" | "received";
   hasAttached?: boolean;
 }
 
-function ChatInput({ attachItemFunction, setMessage, initialSend, hasAttached }: ChatInputProps): JSX.Element {
+function ChatInput({ attachItemFunction, setMessage, initialSend, hasAttached, sendMessageFunction }: ChatInputProps): JSX.Element {
   const fileRef = useRef<null | HTMLInputElement>(null);
   const [attachValue, setAttachValue] = useState<FileList | null>(null);
   const [textValue, setTextValue] = useState<string>("");
@@ -67,7 +68,9 @@ function ChatInput({ attachItemFunction, setMessage, initialSend, hasAttached }:
         sendStatus: initialSend === undefined ? "pending" : initialSend,
       };
 
-      return [...prev, newMessage];
+      sendMessageFunction("text", [...prev, newMessage]);
+    
+      return [...prev, newMessage]
     });
   };
 
@@ -87,11 +90,7 @@ function ChatInput({ attachItemFunction, setMessage, initialSend, hasAttached }:
         </button>
       </div>
 
-      {hasAttached ? (
-          <input className="hidden" type="file" ref={fileRef} onChange={handleChangeAttach} />
-        ) : (
-          ""
-        )}
+      {hasAttached ? <input className="hidden" type="file" ref={fileRef} onChange={handleChangeAttach} /> : ""}
     </Fragment>
   );
 }
