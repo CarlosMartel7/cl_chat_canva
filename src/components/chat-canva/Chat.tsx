@@ -14,7 +14,9 @@ interface ChatProps {
   chat: message[];
   user: user;
   friend: user;
+  date: string;
   deletedLabel: string;
+  blockInput?: boolean;
   editMessageFunction: editChangesFunction;
   deleteMessageFunction: deleteMessageFunction;
   sendMessageFunction: sendMessageFunction;
@@ -25,7 +27,7 @@ interface ChatProps {
   handleGoBackButton: () => void;
 }
 
-function Chat({ devMode, chat, user, friend, deletedLabel, editMessageFunction, deleteMessageFunction, sendMessageFunction, hasAttach, hasDelete, hasEdit, initialSend, handleGoBackButton }: ChatProps): JSX.Element {
+function Chat({ devMode, chat, user, date, friend, deletedLabel, blockInput, editMessageFunction, deleteMessageFunction, sendMessageFunction, hasAttach, hasDelete, hasEdit, initialSend, handleGoBackButton }: ChatProps): JSX.Element {
   const [messages, setMessages] = useState<message[]>(chat);
   const screenRef = useRef<HTMLDivElement | null>(null)
 
@@ -71,11 +73,12 @@ function Chat({ devMode, chat, user, friend, deletedLabel, editMessageFunction, 
     <section className="w-full h-full relative overflow-hidden bg-chat-bg">
         <ChatHeader friend={friend} handleGoBackButton={handleGoBackButton}/>
         <div className="w-full h-[80vh] message-area-h h-80vh overflow-y-auto pb-6" id="main-chat" ref={screenRef}>
+          <span className="fixed bg-stone-300 p-4 ">{date}</span>
         {messages.map((thisMessage: message, index: number) => (
           <Message message={thisMessage} index={index} deletedLabel={deletedLabel} saveChangesFunc={saveChangesFunc} key={thisMessage.order} hasDelete={hasDelete != undefined ? hasDelete : true}  hasEdit={hasEdit != undefined ? hasEdit : true} />
         ))}
         </div>
-        <ChatInput setMessages={setMessages} messages={messages} initialSend={initialSend} hasAttached={hasAttach != undefined ? hasAttach : true} sendMessageFunction={sendMessageFunction}/>
+        <ChatInput setMessages={setMessages} messages={messages} blockInput={blockInput} initialSend={initialSend} hasAttached={hasAttach != undefined ? hasAttach : true} sendMessageFunction={sendMessageFunction}/>
     </section>
   );
 }

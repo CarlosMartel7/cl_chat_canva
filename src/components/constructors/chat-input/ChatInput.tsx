@@ -16,10 +16,19 @@ interface ChatInputProps {
   sendMessageFunction: sendMessageFunction;
   initialSend?: "pending" | "send" | "read" | "received";
   hasAttached?: boolean;
+  blockInput?: boolean;
   messages: message[];
 }
 
-function ChatInput({ attachItemFunction, setMessages, messages, initialSend, hasAttached, sendMessageFunction }: ChatInputProps): JSX.Element {
+function ChatInput({
+  attachItemFunction,
+  setMessages,
+  messages,
+  initialSend,
+  hasAttached,
+  blockInput,
+  sendMessageFunction,
+}: ChatInputProps): JSX.Element {
   const fileRef = useRef<null | HTMLInputElement>(null);
   const [attachValue, setAttachValue] = useState<FileList | null>(null);
   const [textValue, setTextValue] = useState<string>("");
@@ -57,23 +66,23 @@ function ChatInput({ attachItemFunction, setMessages, messages, initialSend, has
   const handleSendMessage = () => {
     setTextValue("");
     setTextHeight(10);
-      const lastOrder = messages[messages.length - 1].order;
+    const lastOrder = messages[messages.length - 1].order;
 
-      const newMessage: message = {
-        content: textValue,
-        format: "text",
-        isUser: true,
-        order: lastOrder + 1,
-        time: formatHourMinute(new Date()),
-        sendStatus: initialSend === undefined ? "pending" : initialSend,
-      };
+    const newMessage: message = {
+      content: textValue,
+      format: "text",
+      isUser: true,
+      order: lastOrder + 1,
+      time: formatHourMinute(new Date()),
+      sendStatus: initialSend === undefined ? "pending" : initialSend,
+    };
 
-      if(sendMessageFunction){
-        sendMessageFunction("text", [...messages, newMessage], newMessage);
-      } else {
-        setMessages([...messages, newMessage])
-      }
+    if (sendMessageFunction) {
+      sendMessageFunction("text", [...messages, newMessage], newMessage);
+    } else {
+      setMessages([...messages, newMessage]);
     }
+  };
 
   return (
     <Fragment>
@@ -85,12 +94,17 @@ function ChatInput({ attachItemFunction, setMessages, messages, initialSend, has
         ) : (
           ""
         )}
-        <TextArea textRef={textRef} textHeight={textHeight} textValue={textValue} handleSetValue={handleSetValue} />
-        <button className="!outline-none" onClick={handleSendMessage}>
-          <SendIcon />
-        </button>
+        {blockInput === true ? (
+          ""
+        ) : (
+          <Fragment>
+            <TextArea textRef={textRef} textHeight={textHeight} textValue={textValue} handleSetValue={handleSetValue} />
+            <button className="!outline-none" onClick={handleSendMessage}>
+              <SendIcon />
+            </button>
+          </Fragment>
+        )}
       </div>
-
       {hasAttached ? <input className="hidden" type="file" ref={fileRef} onChange={handleChangeAttach} /> : ""}
     </Fragment>
   );

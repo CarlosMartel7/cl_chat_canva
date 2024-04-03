@@ -14,7 +14,7 @@
   .hidden {
 	display: none;
   }
-  
+
   .max-h-\[13vh\] {
 	max-height: 13vh;
   }
@@ -76,7 +76,11 @@
   .right-2 {
 	right: 0.5rem;
   }
-  
+ 
+  .p-4 {
+    padding: 1rem;
+  }
+
   .top-\[18px\] {
 	top: 18px;
   }
