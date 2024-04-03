@@ -73,7 +73,7 @@ function Chat({ devMode, chat, user, date, friend, deletedLabel, blockInput, edi
     <section className="w-full h-full relative overflow-hidden bg-chat-bg">
         <ChatHeader friend={friend} handleGoBackButton={handleGoBackButton}/>
         <div className="w-full h-[80vh] message-area-h h-80vh overflow-y-auto pb-6" id="main-chat" ref={screenRef}>
-          <span className="fixed bg-stone-300 p-4 ">{date}</span>
+          <span className="fixed bg-stone-300 left-1/2 transform -translate-x-1/2 p-2 rounded-lg mt-1">{date}</span>
         {messages.map((thisMessage: message, index: number) => (
           <Message message={thisMessage} index={index} deletedLabel={deletedLabel} saveChangesFunc={saveChangesFunc} key={thisMessage.order} hasDelete={hasDelete != undefined ? hasDelete : true}  hasEdit={hasEdit != undefined ? hasEdit : true} />
         ))}
