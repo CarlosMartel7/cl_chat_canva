@@ -143,7 +143,7 @@ export function MessageAudio({ hasDelete, index, content, photo, isUser, saveCha
   return (
     <MESSAGE.EncapsulateMessage index={index} hasDelete={hasDelete} isUser={isUser} format={"other"} messageToChange={content} saveChangesFunc={saveChangesFunc}>
       <Fragment>
-        <audio src={content.content} ref={audioRef} />
+        <audio src={content.url} ref={audioRef} />
         <div className="flex box-border justify-between p-1 w-[376px] audio-w">
           {running ? (
             <div className="h-14 w-14 flex items-center justify-around">
@@ -206,7 +206,7 @@ export function MessageImage({ hasDelete, index, content, isUser, saveChangesFun
     >
       <div className="w-[300px] message-image-w max-h-[4900px] message-image-max-h relative">
         <div className="flex items-center justify-center h-full bg-black rounded">
-          <img src={content.content} className="w-full flex-grow-0 flex-shrink-0 rounded" />
+          <img src={content.url} className="w-full flex-grow-0 flex-shrink-0 rounded" />
         </div>
         <div className={`text-xs absolute bottom-[2px] content-time right-1 text-white`}>
           <span>{content.time}</span>
@@ -228,7 +228,7 @@ export function MessageVideo({ hasDelete, index, content, isUser, saveChangesFun
       <div className="w-[300px] message-image-w max-h-[300px] message-video-h relative">
         <div className="flex items-center justify-center h-full bg-black rounded">
           <video controls preload="metadata" className="w-full flex-grow-0 flex-shrink-0 rounded">
-            <source src={content.content} />
+            <source src={content.url} />
           </video>
         </div>
         <div className={`text-xs absolute bottom-[2px] content-time right-1 text-white`}>
@@ -250,9 +250,8 @@ export function MessageDeleted({ index, isUser, deletedLabel }: MessageDeletedPr
 
   return (
     <div
-      className={`flex justify-end rounded-br rounded-bl shadow-custom max-w-[400px] message-w text-chat-primary ${
-        isUser ? "rounded-tl order-1" : "rounded-tr order-2"
-      }`}
+      className={`flex justify-end rounded-br rounded-bl shadow-custom max-w-[400px] message-w text-chat-primary ${isUser ? "rounded-tl order-1" : "rounded-tr order-2"
+        }`}
       style={{ backgroundColor: messageColor }}
     >
       <div className="p-2 box-border flex gap-2 bg-transparent items-center max-w-full">

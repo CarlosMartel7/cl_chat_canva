@@ -1,8 +1,10 @@
+import { urlBrand } from "../user/User.types";
+
 export type messageFormats = "text" | "audio" | "image" | "video" | "deleted";
 
-export type saveChangesFunction = (format: string, content: message, index: number, type: 'deleted' | 'edit') => void 
+export type saveChangesFunction = (format: string, content: message, index: number, type: 'deleted' | 'edit') => void
 
-export type editChangesFunction = (format: string, content: message, index: number ) => void 
+export type editChangesFunction = (format: string, content: message, index: number) => void
 
 export type deleteMessageFunction = (index: number, prevContent: message) => void
 
@@ -14,6 +16,7 @@ export type message = {
   order: number;
   isUser: boolean;
   time: string;
+  url?: urlBrand;
   sendStatus?: 'pending' | 'send' | "received" | "read"
 };
 
