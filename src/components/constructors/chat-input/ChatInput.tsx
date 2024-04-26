@@ -86,26 +86,26 @@ function ChatInput({
 
   return (
     <Fragment>
-      <div className="absolute bottom-0 bg-stone-300 w-full gap-3 p-6 flex items-center text-chat-secondary max-h-[13vh] max-input-h">
-        {hasAttached ? (
-          <button className="!outline-none" onClick={handleClickAttach}>
-            <AttachFileIcon />
-          </button>
-        ) : (
-          ""
-        )}
-        {blockInput === true ? (
-          ""
-        ) : (
-          <Fragment>
-            <TextArea textRef={textRef} textHeight={textHeight} textValue={textValue} handleSetValue={handleSetValue} />
-            <button className="!outline-none" onClick={handleSendMessage}>
-              <SendIcon />
-            </button>
-          </Fragment>
-        )}
-      </div>
-      {hasAttached ? <input className="hidden" type="file" ref={fileRef} onChange={handleChangeAttach} /> : ""}
+      {blockInput === true ?
+        <Fragment>
+          <div className="absolute bottom-0 bg-stone-300 w-full gap-3 p-6 flex items-center text-chat-secondary max-h-[13vh] max-input-h">
+            {hasAttached ? (
+              <button className="!outline-none" onClick={handleClickAttach}>
+                <AttachFileIcon />
+              </button>
+            ) : (
+              ""
+            )}
+            <Fragment>
+              <TextArea textRef={textRef} textHeight={textHeight} textValue={textValue} handleSetValue={handleSetValue} />
+              <button className="!outline-none" onClick={handleSendMessage}>
+                <SendIcon />
+              </button>
+            </Fragment>
+          </div>
+          {hasAttached ? <input className="hidden" type="file" ref={fileRef} onChange={handleChangeAttach} /> : ""}
+        </Fragment>
+        : ""}
     </Fragment>
   );
 }
