@@ -86,7 +86,7 @@ function ChatInput({
 
   return (
     <Fragment>
-      {blockInput === true ?
+      {blockInput ? "" :
         <Fragment>
           <div className="absolute bottom-0 bg-stone-300 w-full gap-3 p-6 flex items-center text-chat-secondary max-h-[13vh] max-input-h">
             {hasAttached ? (
@@ -105,7 +105,7 @@ function ChatInput({
           </div>
           {hasAttached ? <input className="hidden" type="file" ref={fileRef} onChange={handleChangeAttach} /> : ""}
         </Fragment>
-        : ""}
+      }
     </Fragment>
   );
 }
