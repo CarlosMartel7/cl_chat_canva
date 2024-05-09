@@ -58,9 +58,7 @@ function Chat({ devMode, chat, user, date, friend, deletedLabel, blockInput, edi
   };
 
   useEffect(() => {
-    if (messages.length != chat.length) {
-      setMessages(chat)
-    }
+    setMessages(chat)
   }, [chat])
 
   useEffect(() => {
