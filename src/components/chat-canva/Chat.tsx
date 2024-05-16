@@ -24,10 +24,11 @@ interface ChatProps {
   hasEdit?: boolean;
   hasDelete?: boolean;
   initialSend: "pending" | "send" | "read" | "received";
+  headerButton?: React.ReactNode;
   handleGoBackButton: () => void;
 }
 
-function Chat({ devMode, chat, user, date, friend, deletedLabel, blockInput, editMessageFunction, deleteMessageFunction, sendMessageFunction, hasAttach, hasDelete, hasEdit, initialSend, handleGoBackButton }: ChatProps): JSX.Element {
+function Chat({ devMode, chat, user, date, friend, deletedLabel, blockInput, editMessageFunction, deleteMessageFunction, sendMessageFunction, hasAttach, hasDelete, hasEdit, initialSend, handleGoBackButton, headerButton }: ChatProps): JSX.Element {
   const [messages, setMessages] = useState<message[]>(chat);
   const screenRef = useRef<HTMLDivElement | null>(null)
 
@@ -69,7 +70,7 @@ function Chat({ devMode, chat, user, date, friend, deletedLabel, blockInput, edi
 
   return (
     <section className="w-full h-full relative overflow-hidden bg-chat-bg">
-      <ChatHeader friend={friend} handleGoBackButton={handleGoBackButton} />
+      <ChatHeader friend={friend} handleGoBackButton={handleGoBackButton} headerButton={headerButton} />
       <div className="w-full h-[80vh] message-area-h h-80vh overflow-y-auto pb-6" style={{ minHeight: blockInput ? '100%' : '80vh', paddingBottom: blockInput ? '70px' : '20px' }} id="main-chat" ref={screenRef}>
         <span className="fixed bg-stone-300 left-1/2 transform -translate-x-1/2 p-2 rounded-lg mt-1">{date}</span>
         {messages.map((thisMessage: message, index: number) => (
