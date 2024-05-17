@@ -12,7 +12,7 @@ function ChatHeader({ friend, handleGoBackButton, headerButton }: ChatHeaderProp
   return (
     <section className="w-full bg-gray-400">
       <div className="w-full gap-3 py-2 px-6 flex justify-between items-center">
-        <div>
+        <div className="gap-3 flex items-center">
           <span className="text-[1.5rem] arrrow-icon-size cursor-pointer flex" onClick={handleGoBackButton}>
             <ArrowBackIosNewIcon fontSize="inherit" />
           </span>
