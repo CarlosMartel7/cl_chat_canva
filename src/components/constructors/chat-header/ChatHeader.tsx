@@ -11,24 +11,24 @@ interface ChatHeaderProps {
 function ChatHeader({ friend, handleGoBackButton, headerButton }: ChatHeaderProps): JSX.Element {
   return (
     <section className="w-full bg-gray-400">
-      <div className="w-full gap-3 py-2 px-6 flex items-center">
-        <span className="text-[1.5rem] arrrow-icon-size cursor-pointer flex" onClick={handleGoBackButton}>
-          <ArrowBackIosNewIcon fontSize="inherit" />
-        </span>
-        {friend.photo ? (
-          <img src={friend.photo} className="w-11 h-11 rounded-full" />
-        ) : (
-          <span className="text-[2.75rem] icon-size flex">
-            <AccountCircleIcon fontSize="inherit" />
-          </span>
-        )}
+      <div className="w-full gap-3 py-2 px-6 flex justify-between items-center">
         <div>
-          <span className="block">{friend.name}</span>
-          <i className="block text-xs">{friend.phone}</i>
+          <span className="text-[1.5rem] arrrow-icon-size cursor-pointer flex" onClick={handleGoBackButton}>
+            <ArrowBackIosNewIcon fontSize="inherit" />
+          </span>
+          {friend.photo ? (
+            <img src={friend.photo} className="w-11 h-11 rounded-full" />
+          ) : (
+            <span className="text-[2.75rem] icon-size flex">
+              <AccountCircleIcon fontSize="inherit" />
+            </span>
+          )}
+          <div>
+            <span className="block">{friend.name}</span>
+            <i className="block text-xs">{friend.phone}</i>
+          </div>
         </div>
-        <div style={{ justifySelf: 'end' }}>
-          {headerButton}
-        </div>
+        {headerButton}
       </div>
     </section>
   );
